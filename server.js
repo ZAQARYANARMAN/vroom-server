@@ -7,6 +7,7 @@ import userRouter from "./routers/userRouter.js";
 import carRouter from "./routers/carRouter.js";
 dotenv.config();
 import "./connectDB.js";
+import fetch from "node-fetch";
 
 const server = express();
 
@@ -20,6 +21,5 @@ server.use("/uploads", express.static(path.join("uploads")));
 server.use("/user", userRouter);
 server.use("/car", carRouter);
 
-server.listen(process.env.PORT, () => {
-   console.log("Server running on port", process.env.PORT);
-});
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
