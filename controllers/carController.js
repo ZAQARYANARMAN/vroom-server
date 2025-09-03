@@ -47,6 +47,21 @@ const deleteCar = async (req, res) => {
     }
 }
 
+// const updateCar = async (req, res) => {
+//     try {
+//         const updatedCar = await Car.findByIdAndUpdate(req.query.id, req.body, {
+//             runValidators: true,
+//             new: true
+//         })
+
+//         if (updatedCar) return res.status(201).json({ message: "user is updated", data: updatedCar });
+
+//         return res.status(400).json({ message: "aydpisi id ov meqena goutyun chuni" });
+//     } catch (error) {
+//         return res.status(500).json({ message: error.message });
+//     }
+// }
+
 const searchCar = async (req, res) => {
     try {
         const car = await Car.findById(req.query.id).populate("author");

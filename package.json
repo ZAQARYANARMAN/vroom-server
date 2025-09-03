@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "install:prod": "npm install --omit=dev"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +17,9 @@
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.19.0",
     "mongoose": "^8.16.1",
     "multer": "^2.0.1",
-    "node-fetch": "^3.3.2",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.10",
     "path": "^0.12.7"

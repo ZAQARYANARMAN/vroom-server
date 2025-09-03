@@ -9,7 +9,7 @@ const carRouter = express.Router();
 carRouter.get("/searchCar", searchCar);
 carRouter.get("/searchCars", searchCars);
 carRouter.post("/addCar", verifyJwt, addCar);
-carRouter.put("/addPicturesForCar", verifyAddPicturesForCar, carPictureUpload.array("image", 10), addPicturesForCar); // verifyJwt
+carRouter.put("/addPicturesForCar", verifyJwt, verifyAddPicturesForCar, carPictureUpload.array("image", 10), addPicturesForCar); // verifyJwt
 carRouter.delete("/deleteCar", verifyJwt, verifyDeleteCar, deleteCar);
 carRouter.get("/getCarsName", getCarsName);
 carRouter.get("/carModels", carModels);

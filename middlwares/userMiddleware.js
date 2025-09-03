@@ -1,16 +1,19 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { createToken } from "../helpers/helpersFunction.js";
 
 const verifyRegister = async (req, res, next) => {
   try {
     const { username, password, telephone } = req.body;
 
     if (password.trim().length < 8) {
-      return res.status(400).json({ message: "Password must be at least 8 characters long" })
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 8 characters long" });
     }
 
-    if (!username || typeof username !== 'string' || username.trim() === "") {
+    if (!username || typeof username !== "string" || username.trim() === "") {
       return res.status(400).json({ message: "Username is not valid" });
     }
 
@@ -25,7 +28,6 @@ const verifyRegister = async (req, res, next) => {
   }
 };
 
-
 const verifyLogIn = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -36,30 +38,26 @@ const verifyLogIn = async (req, res, next) => {
       next();
     }
 
-    return res.status(404).json({ message: "The email or password is incorrect" });
-  }
-  catch (error) {
+    return res
+      .status(404)
+      .json({ message: "The email or password is incorrect" });
+  } catch (error) {
     return res.status(500).json({ message: error.message });
   }
-}
+};
 
 const verifyJwt = async (req, res, next) => {
   try {
-    !req.body ? req.body = {} : "";
+    !req.body ? (req.body = {}) : "";
     const token = jwt.verify(req.cookies.token, process.env.JWT_KEY);
-    const user = await User.findById(token.id);
 
-    if (!user) {
-      return res.status(404).json({ message: "User does not exist" });
-    }
-
+    createToken(res, token);
     req.body.token = token;
 
     next();
-  }
-  catch (error) {
+  } catch (error) {
     return res.status(401).json({ message: error.message });
   }
-}
+};
 
-export { verifyRegister, verifyLogIn, verifyJwt }
+export { verifyRegister, verifyLogIn, verifyJwt };
